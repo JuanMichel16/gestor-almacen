@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Gestor de Almacen</h1>
+
+    <div>
+        <form id="formulario-agregar" action="#">
+            <header>
+                <h2>Agregar nuevo articulo</h2>
+            </header>
+            <div>
+                <label for="nombre">Nombre del articulo:</label>
+                <input id="nombre" type="text">
+            </div>
+            <div>
+                <label for="descripcion">Descripcion del articulo:</label>
+                <input id="descripcion" type="text">
+            </div>
+            <div>
+                <label for="cantidad">Cantidad de articulos:</label>
+                <input id="cantidad" type="text">
+            </div>
+            <div>
+                <label for="costo">Costo del articulo:</label>
+                <input id="costo" type="text">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+
+        <div id="mensaje1">
+        </div>
+    </div>
+    <div>
+        <form action="#" id="formulario-borrar">
+            <header>
+                <h2>Eliminar articulo</h2>
+            </header>
+            <div>
+                <label for="codigoBorrar">Codigo del articulo que desea eliminar:</label>
+                <input id="codigoBorrar" type="text">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+        </form>
+    </div>
+    <div>
+        <form action="#" id="formulario-buscar">
+            <header>
+                <h2>Buscar articulo</h2>
+            </header>
+            <div>
+                <label for="codigoBuscar">Codigo del articulo que desea buscar:</label>
+                <input id="codigoBuscar" type="text">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+    </div>
+    <div id="productos">
+        <h3>Listado de productos</h3>
+        <ul id="listado-productos">
+        </ul>
+        <button id="btn1">Listar productos</button>
+        <button id="btn2">Listar productos de manera inversa</button>
+    </div><br>
+    <div id="acciones">
+        <h1>Historial de acciones realizadas</h1>
+    </div>
+</body>
+    <script src="app.js" type="module"></script>
+</html>
