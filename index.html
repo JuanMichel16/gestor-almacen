@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./diseno.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
 <body>
     <h1>Gestor de Almacen</h1>
 
-    <div>
+    <div class="container">
         <form id="formulario-agregar" action="#">
             <header>
                 <h2>Agregar nuevo articulo</h2>
@@ -30,13 +31,13 @@
                 <input id="costo" type="text">
             </div>
 
-            <button type="submit" class="btn btn-primary">Agregar</button>
+            <button type="submit" class="btn-primary">Agregar</button>
         </form>
 
         <div id="mensaje1">
         </div>
     </div>
-    <div>
+    <div class="container">
         <form action="#" id="formulario-borrar">
             <header>
                 <h2>Eliminar articulo</h2>
@@ -46,10 +47,10 @@
                 <input id="codigoBorrar" type="text">
             </div>
 
-            <button type="submit" class="btn btn-primary">Eliminar</button>
+            <button type="submit" class="btn-primary">Eliminar</button>
         </form>
     </div>
-    <div>
+    <div class="container">
         <form action="#" id="formulario-buscar">
             <header>
                 <h2>Buscar articulo</h2>
@@ -58,19 +59,26 @@
                 <label for="codigoBuscar">Codigo del articulo que desea buscar:</label>
                 <input id="codigoBuscar" type="text">
             </div>
+            <div>
+                <ul id="producto-buscado">
 
-            <button type="submit" class="btn btn-primary">Buscar</button>
+                </ul>
+            </div>
+
+            <button type="submit" class="btn-primary">Buscar</button>
         </form>
     </div>
     <div id="productos">
         <h3>Listado de productos</h3>
         <ul id="listado-productos">
         </ul>
-        <button id="btn1">Listar productos</button>
-        <button id="btn2">Listar productos de manera inversa</button>
+        <button id="btn1" class="btn-primary">Listar productos</button>
+        <button id="btn2" class="btn-primary">Listar productos de manera inversa</button>
     </div><br>
-    <div id="acciones">
+    <div>
         <h1>Historial de acciones realizadas</h1>
+        <ul id="acciones">
+        </ul>
     </div>
 </body>
     <script src="app.js" type="module"></script>

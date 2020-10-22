@@ -1,6 +1,6 @@
 import UI from './ui.js';
-import Producto from './producto.js'
-import Almacen from './almacen.js'
+import Producto from './producto.js';
+import Almacen from './almacen.js';
 
 const ui = new UI();
 const almacen = new Almacen();
@@ -9,7 +9,7 @@ const formularioAgregar = document.querySelector('#formulario-agregar');
 const formularioBorrar = document.querySelector('#formulario-borrar');
 const formularioBuscar = document.querySelector('#formulario-buscar');
 const btnListarProductos = document.querySelector('#btn1');
-const btnListarProductosReverse = document.querySelector('#btn2')
+const btnListarProductosReverse = document.querySelector('#btn2');
 
 formularioAgregar.addEventListener('submit', validarDatos);
 formularioBorrar.addEventListener('submit', borrarArticulo);
@@ -26,21 +26,22 @@ function validarDatos(e) {
     const costo = Number(document.getElementById('costo').value);
 
     if(almacen.totalProductos() >=20) {
-        ui.mostrarMensaje('Has alcanzado el limite de productos agregados!');
+        ui.mostrarMensaje('Has alcanzado el limite de productos agregados!', 'general');
     } else {
 
         if(nombre === '' || descripcion === '' || cantidad === '' || costo === '') {
-            ui.mostrarMensaje('Todos los campos necesitan estar llenos.');
+            ui.mostrarMensaje('Todos los campos necesitan estar llenos.', "general");
         } else if( isNaN(cantidad) || cantidad <= 0) {
-            ui.mostrarMensaje('Revise que haya llenado los espacios correctamente.');
+            ui.mostrarMensaje('Revise que haya llenado los espacios correctamente.', 'general');
         } else if(costo <= 0 || isNaN(costo)) {
-            ui.mostrarMensaje('Revise que haya llenado los espacios correctamente.');
+            ui.mostrarMensaje('Revise que haya llenado los espacios correctamente.', 'general');
         } else {
             const nuevoProducto = new Producto(nombre, descripcion, cantidad, costo);
+
             almacen.agregarProducto(nuevoProducto);
+            ui.mostrarMensaje('Se ha agreado un nuevo producto!', 'reporte');
         }
     }
-
 
     setTimeout(() => {
         limpiarFormularios();
@@ -54,6 +55,7 @@ function borrarArticulo(e) {
     const codigo = Number(document.querySelector('#codigoBorrar').value);
     if(almacen.borrarProducto(codigo)) {
         alert('El articulo se borro con exito!');
+        ui.mostrarMensaje('Se ha borrado un producto', 'reporte')
 
         return;
     } else {
@@ -76,11 +78,12 @@ function buscarArticulo(e) {
 
     for(let producto of productos) {
         ui.mostrarProducto(producto);
+        ui.mostrarMensaje('Se ha utilizado la opcion de buscar articulo!', 'reporte');
     }
 
     setTimeout(() => {
         limpiarFormularios();
-    }, 3000)
+    }, 1000)
 }
 
 
@@ -92,6 +95,8 @@ function recuperarProducto() {
     for(let producto of almacen.productos) {
         ui.listarProductos(producto);
     }
+
+    ui.mostrarMensaje('Se han mostrado una lista con los productos agregados!', 'reporte');
 }
 
 
@@ -107,7 +112,6 @@ function recuperarProducto2() {
 
 
 function borrarElementos() {
-    
     const lista = document.querySelector('#listado-productos');
 
     while(lista.firstChild) {
@@ -117,7 +121,6 @@ function borrarElementos() {
 
 
 function limpiarFormularios() {
-
     formularioAgregar.reset();
     formularioBorrar.reset();
     formularioBuscar.reset();

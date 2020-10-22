@@ -1,27 +1,34 @@
 export default class UI {
-    constructor() {
+    constructor() {}
 
-    }
+    mostrarMensaje(mensaje, tipo) {
 
-    mostrarMensaje(mensaje) {
         const padre = document.querySelector('#mensaje1');
-
+        const historial = document.querySelector('#acciones')
         const divMensaje = document.createElement('div');
         divMensaje.className = 'error'
         divMensaje.innerHTML = `
         <p>${mensaje}</p>
         `
 
-        padre.appendChild(divMensaje);
+        if(tipo === 'general') {
+            padre.appendChild(divMensaje);
+
+            return;
+        }else if(tipo === 'reporte'){
+            historial.appendChild(divMensaje)
+
+            return;
+        }
 
 
         setTimeout(() => {
             divMensaje.remove();
-        }, 5000)
+        }, 2000)
     }
 
     mostrarProducto({codigo, nombre, descripcion, cantidad, costo}) {
-        const padre = document.querySelector('#acciones')
+        const divBuscado = document.querySelector('#producto-buscado')
         const div = document.createElement('div');
         div.innerHTML = `
         <p>Codigo: ${codigo}</p>
@@ -31,7 +38,7 @@ export default class UI {
         <p>Costo: ${costo}</p>
         `;
 
-        padre.appendChild(div);
+        divBuscado.appendChild(div);
     }
 
 
