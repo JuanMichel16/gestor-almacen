@@ -43,7 +43,8 @@ function validarDatos(e) {
 
     setTimeout(() => {
         limpiarFormularios();
-    }, 1000)
+        document.querySelector('#mensaje1').remove();
+    }, 1500)
 }
 
 

@@ -43,6 +43,8 @@ export default class UI {
 
 
     listarProductos({codigo, nombre, descripcion, cantidad, costo}) {
+
+
         const padre = document.querySelector('#listado-productos')
         const div = document.createElement('div');
         div.innerHTML = `
@@ -51,7 +53,7 @@ export default class UI {
         <p>Descripcion: ${descripcion}</p>
         <p>Cantidad: ${cantidad}</p>
         <p>Costo: ${costo}</p>
-        <p>Total ${cantidad}</p>
+        <p>Total ${cantidad*costo}</p>
         `;
 
         padre.appendChild(div);

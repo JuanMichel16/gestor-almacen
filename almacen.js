@@ -20,10 +20,9 @@ export default class Almacen {
 
             return agregado;
         } else {
-
             this.productos[this.productos.length] = producto
-
             console.log(this.productos);
+
             return agregado;
         }
     }
