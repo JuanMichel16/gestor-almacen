@@ -13,16 +13,18 @@ export default class Almacen {
 
 
     agregarProducto(producto) {
+        let agregado = true;
 
-        if(this.productos.length >= 20) {
-            ui.imprimirMensaje('No se ha podido agregar el producto');
+        if(this.totalProductos() >= 20) {
+            agregado = false;
 
-            return;
+            return agregado;
         } else {
-            this._productos.push(producto);
 
-            console.log(this.productos)
-            return;
+            this.productos[this.productos.length] = producto
+
+            console.log(this.productos);
+            return agregado;
         }
     }
 
@@ -31,19 +33,37 @@ export default class Almacen {
 
         this._productos.forEach((producto, indice) => {
             if(producto.codigo === codigo) {
-                borrado = true
-                this._productos.splice(indice, 1);
+                this._productos[indice] = undefined;
+                borrado = true;
             }
-        })
+        });
 
-        
         return borrado
     }
 
 
     buscarProducto(codigo) {
-        const producto = this.productos.filter(producto => producto.codigo === codigo);
+        let producto = ""
+
+        this.productos.forEach((articulo) => {
+            if(articulo.codigo === codigo) {
+                producto = articulo
+            }
+        })
 
         return producto
+    }
+
+
+    reverseProductos() {
+        let posicion = 0;
+
+        let productosReverse = [];
+
+        for(let i = this.productos.length; i >= 0; i--) {
+            productosReverse[posicion++] = this.productos[i];
+        }
+
+        return productosReverse;
     }
 }

@@ -25,10 +25,6 @@ function validarDatos(e) {
     const cantidad = Number(document.getElementById('cantidad').value);
     const costo = Number(document.getElementById('costo').value);
 
-    if(almacen.totalProductos() >=20) {
-        ui.mostrarMensaje('Has alcanzado el limite de productos agregados!', 'general');
-    } else {
-
         if(nombre === '' || descripcion === '' || cantidad === '' || costo === '') {
             ui.mostrarMensaje('Todos los campos necesitan estar llenos.', "general");
         } else if( isNaN(cantidad) || cantidad <= 0) {
@@ -37,15 +33,17 @@ function validarDatos(e) {
             ui.mostrarMensaje('Revise que haya llenado los espacios correctamente.', 'general');
         } else {
             const nuevoProducto = new Producto(nombre, descripcion, cantidad, costo);
-
-            almacen.agregarProducto(nuevoProducto);
-            ui.mostrarMensaje('Se ha agreado un nuevo producto!', 'reporte');
+            
+            if(almacen.agregarProducto(nuevoProducto)) {
+                ui.mostrarMensaje('Se ha agreado un nuevo producto!', 'reporte');
+            } else {
+                ui.mostrarMensaje('Has alcanzado el limite de productos agregados!', 'general')
+            }
         }
-    }
 
     setTimeout(() => {
         limpiarFormularios();
-    }, 2000)
+    }, 1000)
 }
 
 
@@ -53,7 +51,7 @@ function borrarArticulo(e) {
     e.preventDefault();
 
     const codigo = Number(document.querySelector('#codigoBorrar').value);
-    if(almacen.borrarProducto(codigo)) {
+    if(almacen.borrarProducto(codigo) !== undefined) {
         alert('El articulo se borro con exito!');
         ui.mostrarMensaje('Se ha borrado un producto', 'reporte')
 
@@ -74,12 +72,9 @@ function buscarArticulo(e) {
     e.preventDefault();
 
     const codigoProducto = Number(document.querySelector('#codigoBuscar').value);
-    const productos = almacen.buscarProducto(codigoProducto);
-
-    for(let producto of productos) {
-        ui.mostrarProducto(producto);
-        ui.mostrarMensaje('Se ha utilizado la opcion de buscar articulo!', 'reporte');
-    }
+    let producto = almacen.buscarProducto(codigoProducto);
+    ui.mostrarProducto(producto);
+    ui.mostrarMensaje('Se ha utilizado la opcion de buscar articulo!', 'reporte');
 
     setTimeout(() => {
         limpiarFormularios();
@@ -104,8 +99,13 @@ function recuperarProducto() {
 function recuperarProducto2() {
     borrarElementos();
 
-    for(let producto of almacen.productos.reverse()) {
-        ui.listarProductos(producto)
+    let productos = almacen.reverseProductos();
+
+    for(let producto of productos) {
+
+        if(producto !== undefined)
+            ui.listarProductos(producto)
+        
     }
 }
 
